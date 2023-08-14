@@ -7,7 +7,7 @@ import { IEmployee } from './utils/IEmployee.model';
 import Dropdown from './components/Dropdown';
 import { FileFormatOptionValues } from './utils/FileFormatOptions.enum';
 import DataTable from './components/DataTable';
-import { createEmployeeProjectArray, csvFileToArray, getTableHeaders, mapNullableEmployeesData } from './utils/UtilFunctions';
+import { createEmployeeProjectArray, csvFileToArray, getTableHeaders, mapNullableEmployeesData } from './utils/utilFunctions.ts';
 import Button from './components/Button';
 import FileInput from './components/FileInput';
 import { FileFormatDropdownOptions } from './utils/FileFormatDropdownOptions';
@@ -24,7 +24,7 @@ function App() {
   useEffect(() => {
     const mappedData: IEmployee[] = mapNullableEmployeesData(data);
     const result: IEmployeePair[] = createEmployeeProjectArray(mappedData);
-    
+
     console.log('result: ', result);
     // TODO: append the correct table data
 
