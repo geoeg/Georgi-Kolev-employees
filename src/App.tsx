@@ -50,7 +50,6 @@ function App() {
   };
 
   const handleCsvFileSubmit = (file: File): void => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     fileReader.onload = function (event: any) {
       const text: string = event.target.result;
 
@@ -61,7 +60,6 @@ function App() {
   };
 
   const handleXlsxFileSubmit = (file: File): void => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     fileReader.onload = function (event: any) {
       const data = event.target.result;
       const workbook = XLSX.read(data, { type: "binary" });
@@ -99,20 +97,20 @@ function App() {
             options={FileFormatDropdownOptions}
             onOptionChange={handleFileFormatChange}
           />
-           <div className='uploader-container'>
-             <FileInput
-               fileFormat={selectedFormat}
-               onFileChange={handleOnFileChange}
-             />
-             <Button
-               label={labels.IMPORT_BTN_LABEL}
-               onClick={handleFileUploadSubmit}
-             />
-           </div>
+          <div className="uploader-container">
+            <FileInput
+              fileFormat={selectedFormat}
+              onFileChange={handleOnFileChange}
+            />
+            <Button
+              label={labels.IMPORT_BTN_LABEL}
+              onClick={handleFileUploadSubmit}
+            />
+          </div>
         </form>
       </section>
 
-      <section className='table-container'>
+      <section className="table-container">
         <DataTable data={employeePairs} />
       </section>
     </>

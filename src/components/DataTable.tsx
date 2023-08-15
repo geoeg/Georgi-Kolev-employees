@@ -8,7 +8,6 @@ interface DataTableProps {
 }
 
 const DataTable: React.FC<DataTableProps> = ({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   data,
 }: DataTableProps) => {
   useEffect(() => {

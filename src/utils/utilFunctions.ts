@@ -33,7 +33,6 @@ export const convertCsvFileDataToArray = (string: string): IEmployee[] => {
   return csvRows.map((item: string) => {
     const values: string[] = item.split(",");
     const obj = csvHeader.reduce(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (object: any, header: string, index: number) => {
         object[header] = values[index];
         return object;
@@ -58,7 +57,6 @@ export const convertXlsxFileDataToArray = (
 
   for (let i = 1; i < employeesData.length; i++) {
     const dataRow = employeesData[i];
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const dataObject: any = {};
 
     for (let j = 0; j < headers.length; j++) {
@@ -73,7 +71,6 @@ export const convertXlsxFileDataToArray = (
   return dataObjects;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const calculateDaysWorked = (data: IEmployee[]): IEmployeePair[] => {
   const results: IEmployeePair[] = [];
 
@@ -138,7 +135,6 @@ export const appendTableBody = (
     const row: HTMLTableRowElement = document.createElement("tr");
     headers.forEach((header: string) => {
       const cell = document.createElement("td");
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       cell.textContent = (rowData as any)[header] || "";
       row.appendChild(cell);
     });
