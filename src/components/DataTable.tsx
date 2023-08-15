@@ -1,13 +1,26 @@
-import { IEmployee } from "../utils/IEmployee.model";
+import { useEffect } from "react";
+import { IEmployeePair } from "../utils/IEmployeePair.model";
+import { dataTableHeaders } from "../utils/TableHeaders.enum";
+import { appendHeaderRow, appendTableBody } from "../utils/utilFunctions";
 
 interface DataTableProps {
-  value: IEmployee[];
+  data: IEmployeePair[];
 }
- 
+
 const DataTable: React.FC<DataTableProps> = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  value
+  data,
 }: DataTableProps) => {
+  useEffect(() => {
+    if (data.length === 0) return;
+
+    appendHeaderRow(dataTableHeaders.map((header) => header.label));
+    appendTableBody(
+      data,
+      dataTableHeaders.map((header) => header.field)
+    );
+  }, [data]);
+
   return (
     <table id="myTable">
       <thead>
@@ -16,6 +29,6 @@ const DataTable: React.FC<DataTableProps> = ({
       <tbody id="tableBody"></tbody>
     </table>
   );
-}
- 
+};
+
 export default DataTable;
