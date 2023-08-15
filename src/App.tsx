@@ -8,9 +8,9 @@ import Dropdown from "./components/Dropdown";
 import { FileFormatOptionValues } from "./utils/FileFormatOptions.enum";
 import DataTable from "./components/DataTable";
 import {
+  calculateDaysWorked,
   convertCsvFileDataToArray,
   convertXlsxFileDataToArray,
-  createEmployeeProjectArray,
   mapNullableEmployeesData,
 } from "./utils/utilFunctions.ts";
 import Button from "./components/Button";
@@ -32,7 +32,7 @@ function App() {
   useEffect(() => {
     if (data.length === 0) return;
 
-    const employeePairData: IEmployeePair[] = createEmployeeProjectArray(
+    const employeePairData: IEmployeePair[] = calculateDaysWorked(
       mapNullableEmployeesData(data)
     );
     setEmployeePairs(employeePairData);

@@ -73,61 +73,46 @@ export const convertXlsxFileDataToArray = (
   return dataObjects;
 };
 
-export const createEmployeeProjectArray = (
-  data: IEmployee[]
-): IEmployeePair[] => {
-  const result: IEmployeePair[] = [];
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const calculateDaysWorked = (data: IEmployee[]): IEmployeePair[] => {
+  const results: IEmployeePair[] = [];
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const employeeProjects: any = {};
+  for (let i = 0; i < data.length; i++) {
+    for (let j = i + 1; j < data.length; j++) {
+      const {
+        EmpID: empIdA,
+        ProjectID: projectIdA,
+        DateFrom: dateFromA,
+        DateTo: dateToA,
+      } = data[i];
+      const {
+        EmpID: empIdB,
+        ProjectID: projectIdB,
+        DateFrom: dateFromB,
+        DateTo: dateToB,
+      } = data[j];
 
-  for (const entry of data) {
-    const { EmpID, ProjectID, DateFrom, DateTo } = entry;
-    const from = new Date(DateFrom).valueOf();
-    const until = new Date(DateTo).valueOf();
-    const daysWorked = Math.ceil((until - from) / (1000 * 60 * 60 * 24)) + 1;
+      const startDate = new Date(
+        Math.max(Date.parse(dateFromA), Date.parse(dateFromB))
+      ).valueOf();
+      const endDate = new Date(
+        Math.min(Date.parse(dateToA), Date.parse(dateToB))
+      ).valueOf();
 
-    if (!employeeProjects[EmpID]) {
-      employeeProjects[EmpID] = {};
-    }
-
-    if (!employeeProjects[EmpID][ProjectID]) {
-      employeeProjects[EmpID][ProjectID] = 0;
-    }
-
-    employeeProjects[EmpID][ProjectID] += daysWorked;
-  }
-
-  // Create a set to track unique pairs
-  const uniquePairs = new Set();
-
-  // Convert the mapping into an array of objects
-  for (const empID_A in employeeProjects) {
-    for (const empID_B in employeeProjects) {
-      if (
-        empID_A !== empID_B &&
-        !uniquePairs.has(`${empID_A}-${empID_B}`) &&
-        !uniquePairs.has(`${empID_B}-${empID_A}`)
-      ) {
-        const projects_A = employeeProjects[empID_A];
-        const projects_B = employeeProjects[empID_B];
-        for (const projectID in projects_A) {
-          if (projects_B[projectID]) {
-            result.push({
-              employeeIdA: Number(empID_A),
-              employeeIdB: Number(empID_B),
-              projectId: Number(projectID),
-              daysWorked: projects_A[projectID] + projects_B[projectID],
-            });
-            // Add the pair to the set
-            uniquePairs.add(`${empID_A}-${empID_B}`);
-          }
-        }
+      if (startDate <= endDate && projectIdA === projectIdB) {
+        const daysWorked =
+          Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+        results.push({
+          employeeIdA: Number(empIdA),
+          employeeIdB: Number(empIdB),
+          projectId: Number(projectIdA),
+          daysWorked: daysWorked,
+        });
       }
     }
   }
-
-  return result;
+  
+  return results;
 };
 
 // table data functions
