@@ -2,10 +2,10 @@ interface FileInputProps {
   fileFormat: string;
   onFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
- 
+
 const FileInput: React.FC<FileInputProps> = ({
   fileFormat,
-  onFileChange
+  onFileChange,
 }: FileInputProps) => {
   return (
     <input
@@ -15,6 +15,6 @@ const FileInput: React.FC<FileInputProps> = ({
       onChange={onFileChange}
     />
   );
-}
- 
+};
+
 export default FileInput;
