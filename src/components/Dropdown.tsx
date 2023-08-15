@@ -12,7 +12,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   onOptionChange,
 }: DropdownProps) => {
   return (
-    <div>
+    <div className='dropdown-container'>
       <label htmlFor="dropdown-menu">{label}</label>
       <select id="dropdown-menu" value={value} onChange={onOptionChange}>
         {options.map((option) => (

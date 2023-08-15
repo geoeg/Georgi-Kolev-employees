@@ -1,4 +1,17 @@
+.dropdown-container,
+.uploader-container {
+  display: flex;
+  gap: 1rem;
+  padding: 0.25rem;
+  justify-content: center;
+}
+
+.table-container {
+  padding: 1rem;
+}
+
 table {
+  padding: 1rem;
   border-collapse: collapse;
   width: 100%;
   border: 1px solid #ddd;

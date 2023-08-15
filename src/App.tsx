@@ -99,18 +99,20 @@ function App() {
             options={FileFormatDropdownOptions}
             onOptionChange={handleFileFormatChange}
           />
-          <FileInput
-            fileFormat={selectedFormat}
-            onFileChange={handleOnFileChange}
-          />
-          <Button
-            label={labels.IMPORT_BTN_LABEL}
-            onClick={handleFileUploadSubmit}
-          />
+           <div className='uploader-container'>
+             <FileInput
+               fileFormat={selectedFormat}
+               onFileChange={handleOnFileChange}
+             />
+             <Button
+               label={labels.IMPORT_BTN_LABEL}
+               onClick={handleFileUploadSubmit}
+             />
+           </div>
         </form>
       </section>
 
-      <section>
+      <section className='table-container'>
         <DataTable data={employeePairs} />
       </section>
     </>
