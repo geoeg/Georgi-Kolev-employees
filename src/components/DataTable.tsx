@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { IEmployeePair } from "../utils/IEmployeePair.model";
 import { dataTableHeaders } from "../utils/TableHeaders.enum";
-import { appendHeaderRow, appendTableBody } from "../utils/utilFunctions";
+import { appendHeaderRow, appendTableBody, clearTableData } from "../utils/utilFunctions";
 
 interface DataTableProps {
   data: IEmployeePair[];
@@ -14,6 +14,7 @@ const DataTable: React.FC<DataTableProps> = ({
   useEffect(() => {
     if (data.length === 0) return;
 
+    clearTableData();
     appendHeaderRow(dataTableHeaders.map((header) => header.label));
     appendTableBody(
       data,

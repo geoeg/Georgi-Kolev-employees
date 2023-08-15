@@ -130,7 +130,7 @@ export const createEmployeeProjectArray = (
   return result;
 };
 
-// append table data functions
+// table data functions
 export const appendHeaderRow = (headers: TableHeaders[]): void => {
   const headerRow: HTMLElement | null = document.getElementById("headerRow");
   if (!headerRow) return;
@@ -159,4 +159,16 @@ export const appendTableBody = (
     });
     tableBody.appendChild(row);
   });
+};
+
+export const clearTableData = (): void => {
+  const tableHeader = document.getElementById("headerRow");
+  if (tableHeader) {
+    tableHeader.innerHTML = "";
+  }
+
+  const tableBody = document.getElementById("tableBody");
+  if (tableBody) {
+    tableBody.innerHTML = "";
+  }
 };
